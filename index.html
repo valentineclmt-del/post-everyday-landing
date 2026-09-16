@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Publiez partout, en une seule fois | Post Everyday</title>
+<meta name="description" content="Le tableau de bord tout-en-un pour planifier, publier et suivre votre contenu sur tous vos réseaux — LinkedIn, Facebook, Instagram, TikTok, YouTube. Vos réseaux, un seul endroit." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Mukta+Mahee:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F9;
+    --surface:#FFFFFF;
+    --ink:#14182B;
+    --muted:#5A6072;
+    --muted-2:#8B90A0;
+    --line:#E5E7F0;
+    --line-strong:#D5D8E6;
+    --accent:#4F46E5;
+    --accent-deep:#3B34C9;
+    --accent-soft:#EEEDFD;
+    --accent-tint:#F5F5FF;
+    --radius:20px;
+    --radius-sm:14px;
+    --shadow:0 24px 60px -30px rgba(30,32,80,.28);
+    --shadow-soft:0 12px 34px -22px rgba(30,32,80,.35);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Mukta Mahee",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serif{font-family:"Playfair Display",Georgia,serif}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+
+  /* ============ eyebrow / section headings ============ */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:14px;
+    font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .eyebrow::before{content:"";width:34px;height:1.5px;background:var(--accent);opacity:.5}
+  .eyebrow.center{justify-content:center}
+  h2.title{
+    font-family:"Playfair Display",serif;font-weight:600;
+    font-size:clamp(30px,4.4vw,50px);line-height:1.08;letter-spacing:-.01em;
+    margin:20px 0 18px;
+  }
+  h2.title em{font-style:italic;color:var(--accent)}
+  .lead{color:var(--muted);font-size:18px;max-width:640px}
+  .section{padding:96px 0}
+  .center{text-align:center}
+  .center .lead{margin-left:auto;margin-right:auto}
+
+  /* ============ buttons ============ */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-weight:600;font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;
+    padding:16px 26px;border-radius:12px;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 14px 30px -12px rgba(79,70,229,.6)}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:0 18px 38px -12px rgba(79,70,229,.7)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .btn .arrow{transition:transform .2s ease}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* ============ navbar ============ */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(244,245,249,.82);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  header.nav.scrolled{border-color:var(--line);background:rgba(244,245,249,.92)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:"Playfair Display",serif;font-weight:600;font-size:21px;letter-spacing:-.01em}
+  .logo .mark{width:34px;height:34px;border-radius:10px;background:var(--accent);display:grid;place-items:center;color:#fff;box-shadow:0 8px 18px -8px rgba(79,70,229,.7)}
+  .logo .mark svg{width:19px;height:19px}
+  nav.links{display:flex;gap:34px}
+  nav.links a{font-size:15px;color:var(--muted);font-weight:500;transition:color .18s}
+  nav.links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:18px}
+  .nav-cta .btn{padding:13px 22px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;color:var(--ink)}
+  @media(max-width:900px){nav.links{display:none}.nav-cta .login{display:none}}
+
+  /* ============ hero ============ */
+  .hero{position:relative;padding:70px 0 84px;text-align:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;display:grid;place-items:center}
+  .hero-bg .glow{position:absolute;width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,70,229,.14),rgba(79,70,229,0) 62%)}
+  .ring{position:absolute;border-radius:50%;border:1.4px dashed rgba(79,70,229,.16)}
+  .ring.r1{width:420px;height:420px}
+  .ring.r2{width:660px;height:660px;opacity:.75}
+  .ring.r3{width:920px;height:920px;opacity:.5}
+  .ring.r4{width:1200px;height:1200px;opacity:.32}
+  .hero-inner{position:relative;z-index:1;max-width:840px;margin:0 auto}
+  .rating{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);
+    border-radius:40px;padding:9px 18px 9px 12px;font-size:14px;color:var(--muted);box-shadow:var(--shadow-soft)}
+  .rating .g{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--line);font-weight:700;font-size:13px;font-family:"Playfair Display",serif}
+  .rating b{color:var(--ink);font-weight:600}
+  .rating .stars{color:#f5a623;letter-spacing:1px}
+  .badge-line{margin:26px 0 8px;display:inline-flex;align-items:center;gap:12px;font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+  .badge-line::before,.badge-line::after{content:"";width:26px;height:1.5px;background:var(--accent);opacity:.4}
+  h1{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(38px,6vw,68px);line-height:1.04;letter-spacing:-.02em;margin:10px 0 22px}
+  h1 em{font-style:italic;color:var(--accent)}
+  .hero p.sub{font-size:20px;color:var(--muted);max-width:600px;margin:0 auto 26px}
+  .networks{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px;color:var(--muted-2);font-size:15px;font-weight:600}
+  .networks .net{display:inline-flex;align-items:center;gap:7px;color:var(--muted)}
+  .networks .net svg{width:18px;height:18px}
+  .networks .dot{color:var(--line-strong)}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .fineprint{margin-top:22px;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2)}
+  .fineprint b{color:var(--accent)}
+  .trust{margin-top:40px;font-size:15px;color:var(--muted)}
+  .trust b{color:var(--ink);font-weight:600}
+
+  /* ============ testimonials ============ */
+  .tsection{padding:40px 0 96px}
+  .marquee{margin-top:44px;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .track{display:flex;gap:22px;width:max-content;animation:scroll 46s linear infinite}
+  .marquee:hover .track{animation-play-state:paused}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .tcard{width:360px;flex:0 0 360px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-soft)}
+  .tcard .stars{color:var(--accent);font-size:14px;letter-spacing:2px;margin-bottom:16px}
+  .tcard blockquote{font-size:16px;line-height:1.6;color:var(--ink);margin-bottom:20px}
+  .tcard .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 11px;border-radius:8px;display:inline-block;margin-bottom:18px}
+  .tcard .who{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+  .tcard .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#8b83f0);display:grid;place-items:center;color:#fff;font-weight:700;font-family:"Playfair Display",serif}
+  .tcard .who .n{font-weight:600;font-size:15px}
+  .tcard .who .r{font-size:13px;color:var(--muted-2)}
+
+  /* ============ freins ============ */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+  .frein{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .frein:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+  .frein .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+  .frein .num{font-family:"Playfair Display",serif;font-style:italic;font-size:40px;color:var(--accent)}
+  .frein .cat{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+  .frein h3{font-family:"Playfair Display",serif;font-weight:600;font-size:22px;line-height:1.2;margin-bottom:14px}
+  .frein p{color:var(--muted);font-size:15.5px}
+  .frein p b{color:var(--ink);font-weight:600}
+
+  /* ============ approche / comparison ============ */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px}
+  .col{border-radius:24px;padding:36px 34px}
+  .col.bad{background:var(--surface);border:1px solid var(--line)}
+  .col.good{background:linear-gradient(160deg,#F3F2FF,#E8E6FC);border:1px solid #D9D6F7;box-shadow:var(--shadow)}
+  .col .chead{display:flex;align-items:center;gap:13px;margin-bottom:26px}
+  .col .ci{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:0 0 34px}
+  .col.bad .ci{background:#F0F1F5;color:var(--muted-2)}
+  .col.good .ci{background:var(--accent);color:#fff}
+  .col .chead h3{font-size:19px;font-weight:600}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .col li{display:flex;align-items:flex-start;gap:12px;font-size:16px}
+  .col.bad li{color:var(--muted)}
+  .col.good li{color:var(--ink);font-weight:500}
+  .col li svg{width:18px;height:18px;flex:0 0 18px;margin-top:3px}
+  .col.bad li svg{color:var(--muted-2)}
+  .col.good li svg{color:var(--accent)}
+
+  /* ============ comment ça marche ============ */
+  .steps{margin-top:52px;display:flex;flex-direction:column;gap:0}
+  .step{display:grid;grid-template-columns:120px 1fr;gap:30px;padding:34px 0;border-top:1px solid var(--line);align-items:start}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step .idx{font-family:"Playfair Display",serif;font-size:30px;color:var(--accent);font-weight:600}
+  .step .idx .cat{display:block;font-family:"Mukta Mahee",sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-top:8px}
+  .step h3{font-family:"Playfair Display",serif;font-weight:600;font-size:24px;margin-bottom:10px}
+  .step p{color:var(--muted);max-width:640px}
+
+  /* ============ pour qui ============ */
+  .audience{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+  .acard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .2s,box-shadow .2s}
+  .acard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .acard .an{font-family:"Playfair Display",serif;font-style:italic;color:var(--accent);font-size:22px;margin-bottom:14px}
+  .acard h3{font-size:19px;font-weight:600;margin-bottom:6px}
+  .acard .prob{color:var(--muted-2);font-size:14.5px;font-style:italic;margin-bottom:14px}
+  .acard p{color:var(--muted);font-size:15px;margin-bottom:20px}
+  .acard .out{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:9px 14px;border-radius:10px}
+  .acard .out svg{width:15px;height:15px}
+
+  /* ============ interactive stepper ============ */
+  .quiz-sec{padding:96px 0}
+  .quiz{max-width:720px;margin:44px auto 0;background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:44px;box-shadow:var(--shadow)}
+  .qbar{height:6px;background:var(--line);border-radius:20px;overflow:hidden;margin-bottom:10px}
+  .qbar span{display:block;height:100%;background:var(--accent);border-radius:20px;transition:width .4s ease;width:25%}
+  .qstep-label{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+  .qquestion{font-family:"Playfair Display",serif;font-size:27px;font-weight:600;margin-bottom:26px}
+  .qopts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .qopt{text-align:left;background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;padding:18px 20px;font-size:16px;font-weight:500;cursor:pointer;color:var(--ink);transition:all .16s;display:flex;align-items:center;justify-content:space-between}
+  .qopt:hover{border-color:var(--accent);background:var(--accent-tint);transform:translateY(-2px)}
+  .qopt .chev{color:var(--muted-2);transition:transform .16s}
+  .qopt:hover .chev{color:var(--accent);transform:translateX(3px)}
+  .qfoot{margin-top:24px;font-size:13px;color:var(--muted-2);text-align:center}
+  .qdone{text-align:center}
+  .qdone .check{width:66px;height:66px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin:0 auto 22px}
+  .qdone h3{font-family:"Playfair Display",serif;font-size:30px;font-weight:600;margin-bottom:12px}
+  .qdone p{color:var(--muted);max-width:440px;margin:0 auto 26px}
+
+  /* ============ faq ============ */
+  .faq{max-width:820px;margin:52px auto 0}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:18px;font-weight:600;color:var(--ink);font-family:inherit}
+  .faq-q .ic{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;transition:transform .25s;font-size:20px;line-height:1}
+  .faq-item.open .faq-q .ic{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .faq-a p{padding:0 0 24px;color:var(--muted);max-width:700px}
+
+  /* ============ blog ============ */
+  .blog-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:22px;margin-top:52px}
+  .bcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+  .bcard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .bcard.feat{grid-row:span 1}
+  .bmeta{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--muted-2);margin-bottom:16px;flex-wrap:wrap}
+  .bmeta .cat{color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11.5px}
+  .bcard h3{font-family:"Playfair Display",serif;font-weight:600;font-size:20px;line-height:1.22;margin-bottom:12px}
+  .bcard.feat h3{font-size:26px}
+  .bcard p{color:var(--muted);font-size:15px;margin-bottom:20px;flex:1}
+  .bcard .read{font-size:13.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+
+  /* ============ final cta ============ */
+  .final{padding:70px 0 110px}
+  .final-card{background:linear-gradient(160deg,var(--ink),#20264a);border-radius:30px;padding:72px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .final-card .glow2{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.4),transparent 65%);top:-160px;left:50%;transform:translateX(-50%);pointer-events:none}
+  .final-card .inner{position:relative;z-index:1;max-width:660px;margin:0 auto}
+  .final-card h2{font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(28px,4vw,44px);line-height:1.12;margin-bottom:18px}
+  .final-card h2 em{font-style:italic;color:#a99ff5}
+  .final-card p{color:rgba(255,255,255,.72);font-size:18px;margin-bottom:34px}
+  .final-card .btn-primary{background:#fff;color:var(--accent-deep);box-shadow:0 20px 40px -16px rgba(0,0,0,.5)}
+  .final-card .btn-primary:hover{background:#f0efff}
+
+  /* ============ footer ============ */
+  footer{border-top:1px solid var(--line);padding:60px 0 40px}
+  .foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  .foot-brand .logo{margin-bottom:16px}
+  .foot-brand p{color:var(--muted);font-size:15px;max-width:280px}
+  .fcol h4{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:18px}
+  .fcol a{display:block;color:var(--muted);font-size:15px;margin-bottom:12px;transition:color .16s}
+  .fcol a:hover{color:var(--accent)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:28px;color:var(--muted-2);font-size:14px;flex-wrap:wrap;gap:14px}
+
+  @media(max-width:900px){
+    .grid-3,.audience,.blog-grid,.compare{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr 1fr}
+    .step{grid-template-columns:1fr}
+    .qopts{grid-template-columns:1fr}
+    .section{padding:72px 0}
+  }
+  @media(max-width:560px){
+    .foot-top{grid-template-columns:1fr}
+    .quiz{padding:28px}
+    .final-card{padding:48px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+      Post Everyday
+    </a>
+    <nav class="links">
+      <a href="#freins">Le problème</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#pourqui">Pour qui</a>
+      <a href="#avis">Avis</a>
+      <a href="#faq">FAQ</a>
+      <a href="#blog">Blog</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://planning.meninbot.com/" class="login" style="font-size:15px;color:var(--muted);font-weight:500">Se connecter</a>
+      <a href="https://planning.meninbot.com/" class="btn btn-primary">Commencer gratuitement</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="glow"></div>
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+    <div class="ring r4"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="rating">
+      <span class="g">G</span>
+      <span>Noté <b>5 étoiles</b> par nos utilisateurs</span>
+      <span class="stars">★★★★★</span>
+    </div>
+    <div class="badge-line">Vos réseaux, un seul endroit</div>
+    <h1>Publiez <em>partout</em>, en une seule fois</h1>
+    <p class="sub">Le tableau de bord tout-en-un pour planifier, publier et suivre votre contenu sur tous vos réseaux — sans jongler entre dix applications.</p>
+    <div class="networks">
+      <span class="net"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>LinkedIn</span>
+      <span class="dot">·</span>
+      <span class="net"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>Facebook</span>
+      <span class="dot">·</span>
+      <span class="net"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38A5.86 5.86 0 00.63 4.14c-.3.76-.5 1.64-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.12-1.38.66-.66 1.08-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 00-1.38-2.12A5.86 5.86 0 0019.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.41-11.85a1.44 1.44 0 11-1.44 1.44 1.44 1.44 0 011.44-1.44z"/></svg>Instagram</span>
+      <span class="dot">·</span>
+      <span class="net"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 01-1-.27 4.9 4.9 0 01-2.14-3.05h-3.1v13.3a2.6 2.6 0 11-1.86-2.5v-3.2a5.77 5.77 0 00-.86-.06 5.72 5.72 0 105.72 5.72V8.9a8.1 8.1 0 004.75 1.52V7.3a4.85 4.85 0 01-1.51-.24z"/></svg>TikTok</span>
+      <span class="dot">·</span>
+      <span class="net"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.12-2.13C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.52A3 3 0 00.5 6.2 31.2 31.2 0 000 12a31.2 31.2 0 00.5 5.8 3 3 0 002.12 2.13c1.88.52 9.38.52 9.38.52s7.5 0 9.38-.52a3 3 0 002.12-2.13A31.2 31.2 0 0024 12a31.2 31.2 0 00-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/></svg>YouTube</span>
+    </div>
+    <div class="hero-cta">
+      <a href="https://planning.meninbot.com/" class="btn btn-primary">Commencer gratuitement <span class="arrow">→</span></a>
+      <a href="#comment" class="btn btn-ghost">Voir comment ça marche</a>
+    </div>
+    <p class="fineprint"><b>Essai gratuit</b> · Sans carte bancaire · Sans engagement</p>
+    <p class="trust">Ils nous font confiance : <b>+2 000 créateurs, marques et indépendants</b> qui publient sans effort</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tsection" id="avis">
+  <div class="wrap center">
+    <span class="eyebrow center">Avis vérifiés</span>
+    <h2 class="title">Ils ont repris le contrôle de <em>leur présence en ligne</em></h2>
+    <p class="lead">Des créateurs, indépendants et équipes qui publient aujourd'hui sur tous leurs réseaux — depuis un seul endroit.</p>
+  </div>
+  <div class="marquee">
+    <div class="track" id="track"></div>
+  </div>
+</section>
+
+<!-- FREINS -->
+<section class="section" id="freins">
+  <div class="wrap">
+    <span class="eyebrow">Les freins</span>
+    <h2 class="title">Qu'est-ce qui freine votre présence <em>aujourd'hui</em> ?</h2>
+    <p class="lead">Trois blocages qui vous coûtent de la visibilité — souvent sans même que vous le remarquiez.</p>
+    <div class="grid-3">
+      <div class="frein">
+        <div class="top"><span class="num">I</span><span class="cat">Régularité</span></div>
+        <h3>L'irrégularité qui vous rend invisible</h3>
+        <p>Vous publiez quand vous y pensez, puis plus rien pendant deux semaines. <b>L'algorithme vous oublie</b>, votre audience aussi — et votre visibilité s'effondre.</p>
+      </div>
+      <div class="frein">
+        <div class="top"><span class="num">II</span><span class="cat">Temps</span></div>
+        <h3>Des heures perdues à republier partout</h3>
+        <p>Reformater, recadrer, republier le même contenu sur chaque réseau vous prend des heures chaque semaine — <b>autant de temps en moins pour créer et pour vendre.</b></p>
+      </div>
+      <div class="frein">
+        <div class="top"><span class="num">III</span><span class="cat">Vision</span></div>
+        <h3>Aucune vue d'ensemble sur vos résultats</h3>
+        <p>Vos statistiques sont éparpillées dans cinq applications. <b>Impossible de savoir ce qui marche vraiment</b>, ni où concentrer vos efforts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROCHE -->
+<section class="section" style="padding-top:20px">
+  <div class="wrap">
+    <span class="eyebrow">L'approche</span>
+    <h2 class="title">Pourquoi tout centraliser au <em>même endroit</em> ?</h2>
+    <p class="lead">Tant que votre contenu est dispersé dans dix applications, vous perdez du temps et de la visibilité. Voici la différence.</p>
+    <div class="compare">
+      <div class="col bad">
+        <div class="chead">
+          <span class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+          <h3>Jongler entre 5 applications</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Vous republiez tout à la main, partout</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Vous oubliez la moitié de vos réseaux</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Vous perdez du temps chaque jour</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Vos statistiques restent éparpillées</li>
+        </ul>
+      </div>
+      <div class="col good">
+        <div class="chead">
+          <span class="ci"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Post Everyday</h3>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Vous publiez une fois, partout à la fois</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tous vos réseaux réunis au même endroit</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Vous planifiez des semaines à l'avance</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Vos performances centralisées, en un coup d'œil</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT CA MARCHE -->
+<section class="section" id="comment">
+  <div class="wrap">
+    <span class="eyebrow">Le fonctionnement</span>
+    <h2 class="title">Comment ça <em>marche</em></h2>
+    <p class="lead">Cinq étapes pour passer d'une présence chaotique à un contenu qui tourne en pilote automatique.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="idx">01<span class="cat">Connexion</span></div>
+        <div><h3>Connectez vos réseaux</h3><p>Reliez LinkedIn, Facebook, Instagram, TikTok et YouTube en quelques clics. Une seule fois, et c'est fait — tous vos comptes réunis sur un seul tableau de bord.</p></div>
+      </div>
+      <div class="step">
+        <div class="idx">02<span class="cat">Création</span></div>
+        <div><h3>Composez votre post une seule fois</h3><p>Rédigez votre message, ajoutez vos visuels ou vos vidéos, et laissez Post Everyday préparer la publication pour chacun de vos réseaux.</p></div>
+      </div>
+      <div class="step">
+        <div class="idx">03<span class="cat">Adaptation</span></div>
+        <div><h3>Adapté à chaque plateforme</h3><p>Format, légende, hashtags : votre contenu est ajusté automatiquement aux codes de chaque réseau — sans avoir à tout refaire à la main.</p></div>
+      </div>
+      <div class="step">
+        <div class="idx">04<span class="cat">Planification</span></div>
+        <div><h3>Planifiez tout votre calendrier</h3><p>Programmez vos publications aux meilleurs moments et visualisez votre semaine entière sur un calendrier clair, en glisser-déposer.</p></div>
+      </div>
+      <div class="step">
+        <div class="idx">05<span class="cat">Suivi</span></div>
+        <div><h3>Suivez vos performances</h3><p>Vues, engagement, abonnés : toutes vos statistiques réunies sur un seul écran, pour savoir enfin ce qui fonctionne vraiment.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section class="section" id="pourqui">
+  <div class="wrap">
+    <span class="eyebrow">Pour qui</span>
+    <h2 class="title">À qui s'adresse <em>Post Everyday</em> ?</h2>
+    <p class="lead">Cinq profils, un même déclic : arrêter de courir après ses réseaux pour enfin publier en automatique.</p>
+    <div class="audience">
+      <div class="acard">
+        <div class="an">01</div>
+        <h3>Les créateurs de contenu</h3>
+        <p class="prob">Publier partout, tous les jours</p>
+        <p>On remplace vos allers-retours entre applications par un seul endroit où tout part en même temps.</p>
+        <span class="out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Une présence quotidienne, sans y passer vos journées</span>
+      </div>
+      <div class="acard">
+        <div class="an">02</div>
+        <h3>Les indépendants &amp; freelances</h3>
+        <p class="prob">Pas le temps pour les réseaux</p>
+        <p>On transforme votre communication en une routine planifiée qui tourne pendant que vous travaillez.</p>
+        <span class="out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Des réseaux actifs même quand vous êtes occupé</span>
+      </div>
+      <div class="acard">
+        <div class="an">03</div>
+        <h3>Les community managers</h3>
+        <p class="prob">Trop de comptes à gérer</p>
+        <p>Pilotez tous les réseaux de tous vos clients depuis un seul tableau de bord, sans vous éparpiller.</p>
+        <span class="out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Tous vos comptes clients au même endroit</span>
+      </div>
+      <div class="acard">
+        <div class="an">04</div>
+        <h3>Les marques &amp; e-commerçants</h3>
+        <p class="prob">Une présence dispersée</p>
+        <p>Un message cohérent, publié partout au bon moment, avec les statistiques pour piloter votre image.</p>
+        <span class="out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Une image de marque maîtrisée sur chaque canal</span>
+      </div>
+      <div class="acard">
+        <div class="an">05</div>
+        <h3>Les entrepreneurs qui se lancent</h3>
+        <p class="prob">L'envie de publier, sans la méthode</p>
+        <p>On vous donne le calendrier, les rappels et l'outil pour tenir le rythme dès le premier jour.</p>
+        <span class="out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Un démarrage régulier et sans prise de tête</span>
+      </div>
+      <div class="acard" style="display:flex;flex-direction:column;justify-content:center;background:linear-gradient(160deg,#F3F2FF,#E8E6FC);border-color:#D9D6F7">
+        <div class="an" style="font-size:26px">Et vous ?</div>
+        <p style="margin-bottom:22px">Découvrez en 30 secondes ce que Post Everyday peut vous faire gagner chaque semaine.</p>
+        <a href="#test" class="btn btn-primary" style="align-self:flex-start">Faire le test <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE TEST -->
+<section class="quiz-sec" id="test">
+  <div class="wrap center">
+    <span class="eyebrow center">Prêt à gagner du temps ?</span>
+    <h2 class="title">Découvrez ce que <em>Post Everyday</em> peut vous faire gagner</h2>
+    <p class="lead">30 secondes pour répondre, un compte gratuit pour tout changer. Sans carte bancaire.</p>
+  </div>
+  <div class="quiz" id="quiz">
+    <div class="qbar"><span id="qprogress"></span></div>
+    <div id="qbody"></div>
+    <p class="qfoot" id="qfoot">Aucune inscription requise pour répondre · Vos réponses restent privées</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap center">
+    <span class="eyebrow center">Questions fréquentes</span>
+    <h2 class="title">Tout ce qu'il faut savoir avant de <em>commencer</em></h2>
+  </div>
+  <div class="faq" id="faq-list"></div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="blog">
+  <div class="wrap">
+    <span class="eyebrow">Le blog</span>
+    <h2 class="title">Publier mieux, sans y passer <em>ses journées</em></h2>
+    <p class="lead">Tendances, formats et méthodes concrètes — pour garder une longueur d'avance sur vos réseaux.</p>
+    <div class="blog-grid">
+      <div class="bcard feat">
+        <div class="bmeta"><span class="cat">Régularité</span> · <span>7 min de lecture</span> · <span>Sept. 2026</span></div>
+        <h3>Pourquoi publier tous les jours bat publier parfaitement (la preuve)</h3>
+        <p>La constance pèse bien plus lourd que la perfection dans l'algorithme. Les chiffres 2026, et la routine qui rend la régularité tenable.</p>
+        <a href="#" class="read">Lire l'article →</a>
+      </div>
+      <div class="bcard">
+        <div class="bmeta"><span class="cat">Algorithme</span> · <span>6 min</span></div>
+        <h3>Ce que les algorithmes récompensent vraiment en 2026</h3>
+        <a href="#" class="read" style="margin-top:auto">Lire →</a>
+      </div>
+      <div class="bcard">
+        <div class="bmeta"><span class="cat">Productivité</span> · <span>5 min</span></div>
+        <h3>Planifiez un mois de contenu en une après-midi : la méthode</h3>
+        <a href="#" class="read" style="margin-top:auto">Lire →</a>
+      </div>
+      <div class="bcard">
+        <div class="bmeta"><span class="cat">Multi-réseaux</span> · <span>8 min</span></div>
+        <h3>Un seul post, cinq réseaux : adapter sans tout refaire</h3>
+        <a href="#" class="read" style="margin-top:auto">Lire →</a>
+      </div>
+      <div class="bcard">
+        <div class="bmeta"><span class="cat">Stratégie</span> · <span>6 min</span></div>
+        <h3>Les meilleurs horaires pour publier sur chaque réseau</h3>
+        <a href="#" class="read" style="margin-top:auto">Lire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="final-card">
+      <div class="glow2"></div>
+      <div class="inner">
+        <h2>Chaque jour sans publier, c'est de la <em>visibilité en moins</em>.</h2>
+        <p>Ne laissez pas passer un jour de plus. Commencez gratuitement et publiez sur tous vos réseaux dès aujourd'hui.</p>
+        <a href="https://planning.meninbot.com/" class="btn btn-primary">Commencer gratuitement <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+          Post Everyday
+        </a>
+        <p>Vos réseaux, un seul endroit. Planifiez, publiez et suivez tout votre contenu depuis un seul tableau de bord.</p>
+      </div>
+      <div class="fcol">
+        <h4>Produit</h4>
+        <a href="#comment">Comment ça marche</a>
+        <a href="#pourqui">Pour qui</a>
+        <a href="#avis">Avis</a>
+        <a href="#test">Faire le test</a>
+      </div>
+      <div class="fcol">
+        <h4>Ressources</h4>
+        <a href="#blog">Blog</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://planning.meninbot.com/">Se connecter</a>
+      </div>
+      <div class="fcol">
+        <h4>Réseaux</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Post Everyday. Tous droits réservés.</span>
+      <span>Mentions légales · Confidentialité · CGU</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* nav shadow on scroll */
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10));
+
+  /* testimonials */
+  const testimonials=[
+    {t:"J'ai divisé par cinq le temps que je passais à publier. Un seul post, et il part sur tous mes réseaux en même temps.",tag:"Gain de temps radical",n:"Léa Fontaine",r:"Créatrice de contenu"},
+    {t:"Je planifie tout mon mois en une après-midi le dimanche. Mes réseaux tournent seuls la semaine, je me concentre sur mon activité.",tag:"Un mois planifié en une après-midi",n:"Antoine Mercier",r:"Coach indépendant"},
+    {t:"Avant, j'oubliais toujours un réseau. Maintenant tout est centralisé : je vois d'un coup d'œil ce qui est programmé et ce qui est publié.",tag:"Plus aucun réseau oublié",n:"Nadia Cherif",r:"Community manager"},
+    {t:"Le calendrier visuel a changé ma façon de bosser. Je vois ma semaine entière, je glisse-dépose, c'est réglé.",tag:"Une vue d'ensemble enfin claire",n:"Julie Rousseau",r:"Fondatrice de marque"},
+    {t:"On gère les réseaux de dix clients depuis un seul tableau de bord. Ce qui nous prenait la journée nous prend une heure.",tag:"Dix clients, un seul écran",n:"Marc Lefèvre",r:"Agence social media"},
+    {t:"Les statistiques réunies au même endroit m'ont fait comprendre quels posts marchent vraiment. J'ai doublé mon engagement.",tag:"Engagement doublé",n:"Sofia Marino",r:"E-commerçante"}
+  ];
+  const track=document.getElementById('track');
+  const cardHTML=t=>`<div class="tcard"><div class="stars">★★★★★</div><span class="tag">${t.tag}</span><blockquote>“${t.t}”</blockquote><div class="who"><span class="av">${t.n[0]}</span><div><div class="n">${t.n}</div><div class="r">${t.r}</div></div></div></div>`;
+  track.innerHTML=[...testimonials,...testimonials].map(cardHTML).join('');
+
+  /* FAQ */
+  const faqs=[
+    ["Sur quels réseaux puis-je publier avec Post Everyday ?","LinkedIn, Facebook, Instagram, TikTok et YouTube, depuis un seul tableau de bord. Vous connectez vos comptes une seule fois et publiez partout en même temps."],
+    ["Faut-il republier manuellement sur chaque réseau ?","Non. Vous composez votre post une seule fois, et Post Everyday l'adapte puis le publie automatiquement sur chaque plateforme."],
+    ["Puis-je planifier mes publications à l'avance ?","Oui. Programmez vos posts aux dates et heures de votre choix et visualisez l'ensemble de votre calendrier, sur une semaine ou un mois."],
+    ["Post Everyday adapte-t-il le format à chaque réseau ?","Oui — format d'image ou de vidéo, légende et hashtags sont ajustés aux codes de chaque plateforme, sans que vous ayez à tout refaire."],
+    ["Est-ce compliqué à prendre en main ?","Non. Tout est pensé pour être opérationnel en quelques minutes, sans aucune compétence technique."],
+    ["Puis-je gérer plusieurs comptes ou clients ?","Oui, c'est idéal pour les agences et community managers : plusieurs comptes et clients, un seul tableau de bord."],
+    ["Mes données et mes accès sont-ils sécurisés ?","Vos connexions passent par les canaux officiels de chaque réseau. Vos identifiants ne sont jamais stockés en clair."],
+    ["Y a-t-il un essai gratuit ?","Oui. Vous pouvez commencer gratuitement, sans carte bancaire ni engagement."]
+  ];
+  document.getElementById('faq-list').innerHTML=faqs.map(([q,a])=>`
+    <div class="faq-item"><button class="faq-q"><span>${q}</span><span class="ic">+</span></button><div class="faq-a"><p>${a}</p></div></div>`).join('');
+  document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{
+    const item=btn.parentElement,a=item.querySelector('.faq-a');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null});
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+  }));
+
+  /* interactive quiz */
+  const steps=[
+    {q:"Combien de réseaux gérez-vous ?",o:["1 à 2 réseaux","3 à 4 réseaux","5 réseaux ou plus","Je débute tout juste"]},
+    {q:"Combien de temps passez-vous à publier par semaine ?",o:["Moins d'1 heure","1 à 3 heures","3 à 6 heures","Plus de 6 heures"]},
+    {q:"Vous êtes plutôt…",o:["Créateur de contenu","Indépendant / freelance","Community manager","Marque / e-commerce"]},
+    {q:"Votre plus gros frein aujourd'hui ?",o:["La régularité","Le manque de temps","La vue d'ensemble","Le manque d'idées"]}
+  ];
+  let cur=0;
+  const qbody=document.getElementById('qbody'),qprog=document.getElementById('qprogress'),qfoot=document.getElementById('qfoot');
+  function render(){
+    if(cur>=steps.length){
+      qprog.style.width='100%';
+      qfoot.style.display='none';
+      qbody.innerHTML=`<div class="qdone">
+        <div class="check"><svg viewBox="0 0 24 24" width="30" height="30" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Post Everyday est fait pour vous.</h3>
+        <p>D'après vos réponses, vous pourriez économiser <b>plusieurs heures chaque semaine</b> en centralisant vos publications. Créez votre compte gratuit et testez-le dès maintenant.</p>
+        <a href="https://planning.meninbot.com/" class="btn btn-primary">Créer mon compte gratuit <span class="arrow">→</span></a>
+      </div>`;
+      return;
+    }
+    const s=steps[cur];
+    qprog.style.width=((cur)/steps.length*100)+'%';
+    qbody.innerHTML=`<div class="qstep-label">Étape ${cur+1}/${steps.length}</div>
+      <div class="qquestion">${s.q}</div>
+      <div class="qopts">${s.o.map((o,i)=>`<button class="qopt" data-i="${i}">${o}<span class="chev">→</span></button>`).join('')}</div>`;
+    qbody.querySelectorAll('.qopt').forEach(b=>b.addEventListener('click',()=>{cur++;render()}));
+  }
+  render();
+</script>
+</body>
+</html>
