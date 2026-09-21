@@ -255,7 +255,7 @@
 
 /* ============ video demo ============ */
 .video-frame{margin:48px auto 0;max-width:340px;border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#000;position:relative;aspect-ratio:9/16}
-.video-frame video{display:block;width:100%;height:100%;object-fit:cover}
+.video-frame video{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:400px){.video-frame{max-width:92vw}}
 
 /* ============ réserver une démo ============ */
