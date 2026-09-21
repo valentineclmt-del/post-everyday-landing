@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Instagram change encore son algorithme">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F5F9"/>
+      <stop offset="1" stop-color="#EAEDF5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- concentric dashed rings (hero motif) -->
+  <g fill="none" stroke="#4F46E5" stroke-opacity="0.16" stroke-width="1.2" stroke-dasharray="2 8">
+    <circle cx="1010" cy="150" r="120"/>
+    <circle cx="1010" cy="150" r="210"/>
+    <circle cx="1010" cy="150" r="300"/>
+    <circle cx="1010" cy="150" r="390"/>
+    <circle cx="1010" cy="150" r="480"/>
+  </g>
+  <!-- category label -->
+  <text x="80" y="150" font-family="'Mukta Mahee','Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="7" fill="#4F46E5">N E W S</text>
+  <!-- title -->
+  <g font-family="'Playfair Display',Georgia,'Times New Roman',serif" fill="#141726">
+    <text x="78" y="300" font-size="76" font-weight="600">Instagram change</text>
+    <text x="78" y="392" font-size="76" font-weight="600">encore son <tspan font-style="italic" fill="#4F46E5">algorithme</tspan></text>
+  </g>
+  <text x="80" y="470" font-family="'Mukta Mahee','Helvetica Neue',Arial,sans-serif" font-size="26" fill="#5A6072">Ce qui compte vraiment en 2026 — et comment t'adapter.</text>
+  <!-- signature -->
+  <g transform="translate(80,560)">
+    <g stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round">
+      <path d="M0 4h26"/><path d="M0 12h26"/><path d="M0 20h16"/>
+    </g>
+    <text x="40" y="18" font-family="'Mukta Mahee','Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="600" fill="#141726">Post Everyday</text>
+  </g>
+</svg>
